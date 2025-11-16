@@ -199,4 +199,73 @@ let newWasd = wasd.bind(user,1,2,3);
 newWasd();
 
 
+//User Cards - Mini Project it will use this , binding concepts
+
+let form = document.querySelector("form");
+let username = document.querySelector("#name");
+let role = document.querySelector("#role");
+let bio = document.querySelector("#bio");
+let photo = document.querySelector("#photo");
+
+const userManager = {
+    users : [],
+    init : function(){
+        form.addEventListener("submit",this.handleSubmit.bind(this));
+    },
+   handleSubmit : function(e){
+    e.preventDefault();
+        this.addUser();
+   },
+   addUser : function(){
+    this.users.push({
+      username: username.value,
+      role: role.value,
+      bio: bio.value,
+      photo: photo.value,
+    });
+
+    form.reset();
+    this.renderUi();
+   },
+   renderUi : function(){
+        document.querySelector(".users").innerHTML = "";
+        this.users.forEach(function(user){
+           let card =  document.createElement("div");
+           card.className = "bg-white/90 backdrop-blur rounded-2xl shadow-xl p-8 flex flex-col items-center border border-blue-100 hover:scale-105 transition";
+           // Image
+           let img = document.createElement("img");
+           img.className =
+        "w-28 h-28 rounded-full object-cover mb-5 border-4 border-blue-200 shadow";
+        img.src = user.photo;
+        card.appendChild(img);
+
+        //Username
+        let un = document.createElement("h2");
+        un.className = "text-2xl font-bold mb-1 text-blue-700";
+        un.textContent = user.username;
+        card.appendChild(un);   
+
+        //Role
+        let role = document.createElement("p");
+        role.className = "text-purple-500 mb-2 font-medium";
+        role.textContent = user.role;
+        card.appendChild(role);
+
+        //Description
+        let desc = document.createElement("p");
+        desc.className = "text-gray-600 text-center";
+        desc.textContent = user.bio;
+        card.appendChild(desc);
+
+        //Append the card to the container
+            document.querySelector(".users").appendChild(card);
+        })
+   }
+    
+}
+
+userManager.init();
+
+
+
 
