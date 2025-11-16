@@ -135,6 +135,68 @@ setTimeout(()=>{
     toast("your game download has completed");
 },3000);
 
+//this keyword - it is a special keyword in js which refers to the object that is currently executing the function
+// it is dynamic in nature and depends on how the function is called
+
+console.log(this); // it will print window object in browser
+
+//this - func scoped
+
+function printThis(){
+    console.log(this);
+}
+
+printThis(); // it will print window object in browser
+
+// this - method (func in an object) scoped
+
+let obj = {
+    name : "Dev Singh",
+    age : 20,
+    printName : function(){
+        console.log(this.name);
+    }
+}
+
+obj.printName(); // it will print the obj object as it is called by the obj object
+
+//this - event handlers
+
+document.querySelector("h1").addEventListener("click",function(){
+    console.log(this);
+})
+
+//global - window
+//func - window
+//func in object (method) - window
+//func arrow - window
+//func inside func - window
+//class - blank obj
+//event handler - element
+
+
+//CALL , APPLY , BIND
+
+let user = {
+    name : "Dev Singh",
+    age : 20,
+}
+
+function wasd(a,b,c){
+    console.log(this.name,a,b,c); // now this will print Dev Singh instead of window object
+}
+
+//CALL - it is used to call a function with a specified this value and arguments provided individually
+wasd.call(user,1,2,3);
+
+//APPLY - it is used to call a function with a specified this value and arguments provided as an array, in this u can only pass arguments as an array
+wasd.apply(user,[1,2,3]);
+
+//BIND - it is used to create a new function with a specified this value and arguments provided individually
+// it does not call the function immediately, instead it returns a new function which can be called later
+
+let newWasd = wasd.bind(user,1,2,3);
+newWasd();
 
 
 
