@@ -25,3 +25,64 @@ html,body{
 h1{
   color: white;
 }
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: 250px;
+    height: 250px;
+    gap: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.name {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.email {
+    font-size: 14px;
+    color: #555;
+}
+
+.btn{
+    padding: 10px 16px;
+    height: 40px;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    background-color: royalblue;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #0056b3;
+}
+
+.btn:active{
+  scale: 0.95;
+}
