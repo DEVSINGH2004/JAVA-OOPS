@@ -86,3 +86,14 @@ h1{
 .btn:active{
   scale: 0.95;
 }
+
+#search{
+    padding: 10px 16px;
+    height: 40px;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
