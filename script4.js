@@ -161,9 +161,97 @@ function debounce(fnc,delay){
     }
 }
 
-inp.addEventListener("input",debounce(function(){
-    console.log(inp.value);
-},1000))      
+//Throttling - executes a func at a fixed interval of time 
+
+function throttle(fnc,delay){
+    let timer = 0;
+    return function(...args){
+        let now = Date.now();
+        if(now - timer >= delay){
+            fnc(...args);
+            timer = now;
+        }
+    }
+}
+
+// inp.addEventListener("input",throttle(function(){
+//     console.log("throttling");
+// },1000))      
+
+
+//LAZY LOADING - it is a technique where we load the resources only when they are needed
+//this is used to improve the performance of the application by loading the resources only when they are needed
+//this is implemented using the IntersectionObserver API
+
+let img = document.querySelectorAll("img");
+
+console.log(img);
+
+const observer = new IntersectionObserver(function(entries,observer){
+    entries.forEach((entry)=>{
+        if(entry.isIntersecting){
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.style.opacity = 1;
+            observer.unobserve(img);
+        }
+    })
+},{
+    root:null,
+    threshold:0.1
+})
+
+img.forEach((img)=>{
+    observer.observe(img);
+})
+
+
+//CODE SPLITTING - IT IMPORTS THE SCRIPT ONLY WHEN IT IS NEEDED
+
+let b = document.querySelector(".btn");
+
+b.addEventListener("click",async function(){
+    let heavy = await import("./heavy.js");
+    heavy.heavy();
+})
+
+//DOCUMENT FRAGMENT - IT IS USED TO CREATE A TEMPORARY DOM ELEMENT THAT CAN BE USED TO STORE THE ELEMENTS BEFORE APPENDING THEM TO THE DOM
+//IT IS USED TO AVOID THE RE-FLOW AND RE-PAINTS OF THE DOM
+
+let ul = document.querySelector("ul");
+let fragment = document.createDocumentFragment();
+
+for(let i=1;i<11;i++){
+    let li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+        // ul.appendChild(li); // due to this sudden appendChild, the browser has to reflow and repaint the DOM
+        //to avoid this, we use document fragment
+        fragment.appendChild(li);
+}
+
+ul.appendChild(fragment); //much faster and safer than appending each element individually
+
+//ARCHITECTURE THINKING -  BASICALLY SEPARATION OF CONCERNS (SEPARATING THE LOGICAL AND DOM PART)
+
+//EXAMPLE
+
+let b2 = document.querySelector(".btn1");
+let ul1 = document.querySelector(".ul-soc");
+
+function addRandom(){
+    return Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
+}
+
+b2.addEventListener("click",function(){
+        let ans = addRandom();
+        console.log(ans);
+        let li = document.createElement("li");
+        
+        li.textContent = ans;
+        ul1.append(li);
+        console.log(ul1);
+})
+
 
 
 
