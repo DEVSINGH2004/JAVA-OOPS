@@ -55,3 +55,40 @@ loginUser(1,"dev","123",function(data){
         })
     })
 });
+
+
+//PRACTICE
+
+//1.
+
+function greetUser(username,cb){
+    cb(username);
+}
+
+greetUser("dev",function(username){
+    console.log("hello",username);
+})
+
+//2.
+
+function mul(a,b,cb){
+    cb(a*b);
+}
+
+mul(2,3,function(product){
+    console.log(product);
+})
+
+
+//3.
+
+function startTask(cb){
+    setTimeout(cb,1000);
+}
+
+startTask(function(){
+    console.log("task started");
+})
+
+//4.
+
